@@ -1,0 +1,26 @@
+---
+import { education } from '../data/site';
+---
+
+<section class="section education" id="education">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">06 — Education</span>
+      <h2 class="section-title">Academic background</h2>
+    </div>
+    <div class="timeline">
+      {
+        education.map((item) => (
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">{item.date}</span>
+              <h3>{item.degree}</h3>
+              <p class="timeline-company">{item.institution}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
