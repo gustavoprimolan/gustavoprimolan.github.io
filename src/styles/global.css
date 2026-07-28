@@ -653,6 +653,42 @@ main {
   color: var(--text);
 }
 
+.about-interests {
+  padding-top: 0.5rem;
+}
+
+.about-interests-label {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-subtle);
+  margin-bottom: 0.75rem;
+}
+
+.interest-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.interest-tags li {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.4rem 0.875rem;
+  background: var(--accent-green-dim);
+  border: 1px solid rgba(74, 124, 89, 0.25);
+  border-radius: 999px;
+  color: var(--cat-education-text);
+}
+
+.about-text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
 /* --------------------------------------------------------------------------
    Skills
    -------------------------------------------------------------------------- */

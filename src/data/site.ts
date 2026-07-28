@@ -13,8 +13,17 @@ export const site = {
   codingSince: 2016,
   available: true,
   description:
-    'Software Engineer at Bitso. Building reliable systems at the intersection of fintech, blockchain, and backend engineering.',
+    'Software Engineer at Bitso. Backend, fintech, and blockchain — also into video games, sports, CrossFit, and building things beyond code.',
 } as const;
+
+export const interests = [
+  'Video games',
+  'Sports',
+  'CrossFit',
+  'Gym',
+  'Anime & events',
+  'Learning new things',
+] as const;
 
 export const skills = [
   {

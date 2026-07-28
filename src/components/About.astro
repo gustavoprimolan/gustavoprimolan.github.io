@@ -1,30 +1,42 @@
 ---
-import { site } from '../data/site';
+import { site, interests } from '../data/site';
 ---
 
 <section class="section about" id="about">
   <div class="container">
     <div class="section-header">
       <span class="section-tag">01 — About</span>
-      <h2 class="section-title">Engineering with purpose</h2>
+      <h2 class="section-title">Who I am</h2>
     </div>
     <div class="about-grid">
       <div class="about-text">
         <p class="lead">
-          I'm a software engineer based in {site.location}, currently working at
+          I'm Gustavo — a software engineer based in {site.location}, currently at
           <a href={site.companyUrl} target="_blank" rel="noopener noreferrer">{site.company}</a>,
-          one of Latin America's leading cryptocurrency platforms.
+          one of Latin America's leading cryptocurrency platforms. But this site isn't just a résumé
+          in HTML. It's a picture of the whole person behind the commits.
         </p>
         <p>
-          With a background spanning backend development, blockchain smart contracts, DevOps
-          practices, and AI experimentation, I focus on writing clean, maintainable code that
-          scales. I'm passionate about continuous learning — you'll find me exploring new
-          technologies through hands-on side projects and study repositories.
+          Professionally, I care about backend systems that are reliable, secure, and built to last —
+          from fintech and digital banking to blockchain experiments, DevOps, and AI side projects.
+          I like understanding how things work under the hood and shipping code that holds up in
+          production.
         </p>
         <p>
-          When I'm not shipping code, I'm diving into game development studies, participating in
-          hackathons, or refining my craft across the Java and Python ecosystems.
+          Away from the keyboard, I'm just as active. I love <strong>video games</strong>, follow
+          <strong>sports</strong>, and train regularly — <strong>CrossFit</strong>, the{' '}
+          <strong>gym</strong>, and staying moving in general. I'm also involved in community and
+          event work (like building the site for Bauru Anime Fest), because the things I'm curious
+          about outside tech often find their way back into what I build.
         </p>
+        <div class="about-interests">
+          <h3 class="about-interests-label">Outside of work</h3>
+          <ul class="interest-tags">
+            {interests.map((interest) => (
+              <li>{interest}</li>
+            ))}
+          </ul>
+        </div>
       </div>
       <aside class="about-card">
         <h3>Quick facts</h3>
@@ -44,6 +56,10 @@ import { site } from '../data/site';
           <div>
             <dt>Languages</dt>
             <dd>{site.languages}</dd>
+          </div>
+          <div>
+            <dt>Also into</dt>
+            <dd>Games, sports &amp; fitness</dd>
           </div>
         </dl>
       </aside>
