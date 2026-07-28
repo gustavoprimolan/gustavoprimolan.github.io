@@ -1,0 +1,88 @@
+---
+import { getCollection } from 'astro:content';
+import { accomplishmentCategories } from '../data/site';
+
+interface Props {
+  limit?: number;
+  showViewAll?: boolean;
+  showSectionHeader?: boolean;
+}
+
+const { limit, showViewAll = false, showSectionHeader = true } = Astro.props;
+
+const allAccomplishments = await getCollection('accomplishments');
+const sorted = allAccomplishments.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+const items = limit ? sorted.slice(0, limit) : sorted;
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+}
+---
+
+<section class="section accomplishments" id="accomplishments">
+  <div class="container">
+    {
+      showSectionHeader && (
+        <div class="section-header section-header-row">
+          <div>
+            <span class="section-tag">04 — Accomplishments</span>
+            <h2 class="section-title">Certificates & milestones</h2>
+          </div>
+          {
+            showViewAll && sorted.length > (limit ?? 0) && (
+              <a href="/accomplishments" class="link-arrow">
+                View all
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M7 17L17 7M17 7H7M17 7v10" />
+                </svg>
+              </a>
+            )
+          }
+        </div>
+      )
+    }
+
+    {
+      items.length === 0 ? (
+        <p class="empty-state">
+          No accomplishments yet. Add markdown files in <code>src/content/accomplishments/</code>.
+        </p>
+      ) : (
+        <div class="accomplishments-grid">
+          {
+            items.map(({ data }) => (
+              <article class="accomplishment-card">
+                <div class="accomplishment-meta">
+                  <span class={`category-badge category-${data.category}`}>
+                    {accomplishmentCategories[data.category]}
+                  </span>
+                  <time datetime={data.date.toISOString()}>{formatDate(data.date)}</time>
+                </div>
+                <h3>{data.title}</h3>
+                <p class="accomplishment-issuer">{data.issuer}</p>
+                {data.summary && <p class="accomplishment-desc">{data.summary}</p>}
+                <div class="accomplishment-footer">
+                  {data.credentialId && (
+                    <span class="credential-id">ID: {data.credentialId}</span>
+                  )}
+                  {
+                    data.url && (
+                      <a href={data.url} target="_blank" rel="noopener noreferrer" class="link-arrow">
+                        Verify
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M7 17L17 7M17 7H7M17 7v10" />
+                        </svg>
+                      </a>
+                    )
+                  }
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      )
+    }
+  </div>
+</section>

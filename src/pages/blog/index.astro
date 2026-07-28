@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<BaseLayout
+  title="Blog | Gustavo Primolan"
+  description="Thoughts on engineering, learning, and side projects."
+>
+  <section class="section page-content">
+    <div class="container">
+      <div class="page-header">
+        <span class="section-tag">Blog</span>
+        <h1 class="section-title">Writing</h1>
+        <p class="page-intro">
+          Notes on backend engineering, fintech, blockchain, DevOps, and whatever I'm learning
+          along the way.
+        </p>
+      </div>
+
+      {
+        posts.length === 0 ? (
+          <div class="empty-state-card">
+            <h2>No posts yet</h2>
+            <p>
+              Add a markdown file to <code>src/content/blog/</code> and set <code>draft: false</code>{' '}
+              to publish. There's a draft welcome post ready to go.
+            </p>
+            <a href="/" class="btn btn-ghost">Back home</a>
+          </div>
+        ) : (
+          <ul class="blog-list">
+            {
+              posts.map((post) => (
+                <li>
+                  <article class="blog-list-item">
+                    <time datetime={post.data.pubDate.toISOString()}>
+                      {post.data.pubDate.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </time>
+                    <h2>
+                      <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+                    </h2>
+                    <p>{post.data.description}</p>
+                    {
+                      post.data.tags.length > 0 && (
+                        <ul class="post-tags">
+                          {post.data.tags.map((tag) => (
+                            <li>{tag}</li>
+                          ))}
+                        </ul>
+                      )
+                    }
+                  </article>
+                </li>
+              ))
+            }
+          </ul>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

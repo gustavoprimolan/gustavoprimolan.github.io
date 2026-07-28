@@ -1,0 +1,52 @@
+---
+import { site } from '../data/site';
+---
+
+<section class="section about" id="about">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">01 — About</span>
+      <h2 class="section-title">Engineering with purpose</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="lead">
+          I'm a software engineer based in {site.location}, currently working at
+          <a href={site.companyUrl} target="_blank" rel="noopener noreferrer">{site.company}</a>,
+          one of Latin America's leading cryptocurrency platforms.
+        </p>
+        <p>
+          With a background spanning backend development, blockchain smart contracts, DevOps
+          practices, and AI experimentation, I focus on writing clean, maintainable code that
+          scales. I'm passionate about continuous learning — you'll find me exploring new
+          technologies through hands-on side projects and study repositories.
+        </p>
+        <p>
+          When I'm not shipping code, I'm diving into game development studies, participating in
+          hackathons, or refining my craft across the Java and Python ecosystems.
+        </p>
+      </div>
+      <aside class="about-card">
+        <h3>Quick facts</h3>
+        <dl>
+          <div>
+            <dt>Location</dt>
+            <dd>{site.location}</dd>
+          </div>
+          <div>
+            <dt>Company</dt>
+            <dd>{site.company}</dd>
+          </div>
+          <div>
+            <dt>Focus</dt>
+            <dd>Backend &amp; Fintech</dd>
+          </div>
+          <div>
+            <dt>Languages</dt>
+            <dd>{site.languages}</dd>
+          </div>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>

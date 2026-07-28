@@ -1,0 +1,38 @@
+---
+const navItems = [
+  { href: '/#about', label: 'About' },
+  { href: '/#skills', label: 'Skills' },
+  { href: '/#projects', label: 'Projects' },
+  { href: '/#accomplishments', label: 'Accomplishments' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/#contact', label: 'Contact', cta: true },
+];
+
+const pathname = Astro.url.pathname;
+const isHome = pathname === '/';
+---
+
+<header class="header" id="header">
+  <nav class="nav container">
+    <a href="/" class="nav-logo">GP<span class="nav-logo-dot">.</span></a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      {
+        navItems.map(({ href, label, cta }) => (
+          <li>
+            <a
+              href={href}
+              class:list={{ 'nav-cta': cta }}
+              aria-current={!cta && isHome && href.startsWith('/#') ? undefined : pathname === href ? 'page' : undefined}
+            >
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>

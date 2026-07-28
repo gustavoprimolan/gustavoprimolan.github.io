@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Accomplishments from '../../components/Accomplishments.astro';
+---
+
+<BaseLayout
+  title="Accomplishments | Gustavo Primolan"
+  description="Certificates, credentials, and milestones — tech and beyond."
+>
+  <section class="section page-content page-content-top">
+    <div class="container">
+      <div class="page-header">
+        <span class="section-tag">Accomplishments</span>
+        <h1 class="section-title">Certificates & milestones</h1>
+        <p class="page-intro">
+          Professional certifications, education, language credentials, hackathons, and personal
+          achievements. Add new entries as markdown files in{' '}
+          <code>src/content/accomplishments/</code>.
+        </p>
+      </div>
+    </div>
+  </section>
+  <Accomplishments showSectionHeader={false} />
+</BaseLayout>

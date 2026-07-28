@@ -1,0 +1,70 @@
+---
+import { site } from '../data/site';
+---
+
+<section class="hero" id="hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      {
+        site.available && (
+          <p class="hero-eyebrow">
+            <span class="status-dot"></span>
+            Available for opportunities
+          </p>
+        )
+      }
+      <h1 class="hero-title">
+        Gustavo<br />
+        <em>Primolan</em>
+      </h1>
+      <p class="hero-subtitle">
+        Software Engineer at <strong>{site.company}</strong>, building reliable systems at the
+        intersection of fintech, blockchain, and backend engineering.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View my work</a>
+        <a href={site.linkedin} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+          LinkedIn
+        </a>
+        <a href={site.instagram} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+          Instagram
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">{site.publicRepos}+</span>
+          <span class="stat-label">Public repos</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">{site.location}</span>
+          <span class="stat-label">Based in</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">{site.codingSince}</span>
+          <span class="stat-label">Coding since</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="avatar-ring">
+        <img
+          src={site.avatar}
+          alt={site.name}
+          class="avatar"
+          width="280"
+          height="280"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+      <div class="hero-orbit hero-orbit-1"></div>
+      <div class="hero-orbit hero-orbit-2"></div>
+    </div>
+  </div>
+  <a href="#about" class="scroll-hint" aria-label="Scroll to about section">
+    <span>Scroll</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 5v14M5 12l7 7 7-7" />
+    </svg>
+  </a>
+</section>
