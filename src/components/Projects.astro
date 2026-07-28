@@ -1,47 +1,26 @@
 ---
-import { projects, site } from '../data/site';
+import { projects } from '../data/site';
 ---
 
 <section class="section projects" id="projects">
   <div class="container">
-    <div class="section-header section-header-row">
-      <div>
-        <span class="section-tag">03 — Projects</span>
-        <h2 class="section-title">Selected work</h2>
-      </div>
-      <a
-        href={`${site.github}?tab=repositories`}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="link-arrow"
-      >
-        All repositories
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M7 17L17 7M17 7H7M17 7v10" />
-        </svg>
-      </a>
+    <div class="section-header">
+      <span class="section-tag">03 — Projects</span>
+      <h2 class="section-title">Selected work</h2>
     </div>
     <div class="projects-grid">
       {
         projects.map((project) => (
-          <article class:list={['project-card', { 'project-card-live': project.kind === 'live' }]}>
+          <article class="project-card project-card-live">
             <div class="project-header">
-              {
-                project.kind === 'live' ? (
-                  <svg class="project-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                  </svg>
-                ) : (
-                  <svg class="project-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-                  </svg>
-                )
-              }
+              <svg class="project-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+              </svg>
               <a
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={project.kind === 'live' ? `Visit ${project.name}` : `View ${project.name} on GitHub`}
+                aria-label={`Visit ${project.name}`}
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                   <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -54,9 +33,7 @@ import { projects, site } from '../data/site';
               </a>
             </h3>
             <p>{project.description}</p>
-            <span class="project-lang">
-              {project.kind === 'live' ? 'Live site' : project.language}
-            </span>
+            <span class="project-lang">Live site</span>
           </article>
         ))
       }

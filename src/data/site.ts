@@ -53,63 +53,7 @@ export const projects = [
     slug: 'bauru-anime-fest',
     description:
       'Official website for Bauru Anime Fest — anime convention in Bauru, Brazil. Designed and developed by me.',
-    language: 'Web',
     url: 'https://bauruanimefest.com.br/',
-    kind: 'live',
-  },
-  {
-    name: 'Hackathon Group 42',
-    slug: 'hackathon-group-42',
-    description:
-      'Repository focused on AI hackathon — exploring machine learning applications in a collaborative setting.',
-    language: 'AI',
-    url: 'https://github.com/gustavoprimolan/hackathon-group-42',
-    kind: 'github',
-  },
-  {
-    name: 'Blockchain Studies',
-    slug: 'blockchain-studies',
-    description:
-      'Hands-on exploration of blockchain technology and smart contract development with Solidity.',
-    language: 'Solidity',
-    url: 'https://github.com/gustavoprimolan/blockchain-studies',
-    kind: 'github',
-  },
-  {
-    name: 'DevOps Studies',
-    slug: 'devops-studies',
-    description:
-      'Practical DevOps learning — automation scripts, infrastructure patterns, and deployment workflows.',
-    language: 'Python',
-    url: 'https://github.com/gustavoprimolan/devops-studies',
-    kind: 'github',
-  },
-  {
-    name: 'Game Dev Studies',
-    slug: 'game-dev-studies',
-    description:
-      'A collaborative resource space for aspiring and seasoned game developers to learn and build together.',
-    language: 'Game Dev',
-    url: 'https://github.com/gustavoprimolan/game-dev-studies',
-    kind: 'github',
-  },
-  {
-    name: 'Udemy Java',
-    slug: 'udemy-java',
-    description:
-      'Comprehensive Java coursework and exercises — object-oriented programming, collections, and beyond.',
-    language: 'Java',
-    url: 'https://github.com/gustavoprimolan/udemy-java',
-    kind: 'github',
-  },
-  {
-    name: 'ERP Java Web',
-    slug: 'ERPJavaWeb',
-    description:
-      'A basic ERP system built with Java for web — enterprise resource planning fundamentals.',
-    language: 'Java',
-    url: 'https://github.com/gustavoprimolan/ERPJavaWeb',
-    kind: 'github',
   },
 ] as const;
 
