@@ -54,10 +54,21 @@ function formatDate(date: Date) {
           {
             items.map(({ data }) => (
               <article class="accomplishment-card">
+                {data.image && (
+                  <img
+                    src={data.image}
+                    alt=""
+                    class="accomplishment-image"
+                    loading="lazy"
+                    width="400"
+                    height="300"
+                  />
+                )}
                 <div class="accomplishment-meta">
                   <span class={`category-badge category-${data.category}`}>
                     {accomplishmentCategories[data.category]}
                   </span>
+                  {data.award && <span class="award-badge">{data.award}</span>}
                   <time datetime={data.date.toISOString()}>{formatDate(data.date)}</time>
                 </div>
                 <h3>{data.title}</h3>

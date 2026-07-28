@@ -31,6 +31,8 @@ const accomplishments = defineCollection({
     url: z.url().optional(),
     credentialId: z.string().optional(),
     summary: z.string().optional(),
+    award: z.string().optional(),
+    image: z.string().optional(),
   }),
 });
 

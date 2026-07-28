@@ -72,7 +72,7 @@ export const experience = [
     company: 'Inter',
     location: 'Belo Horizonte, MG · Hybrid',
     description:
-      'Backend development for a digital bank — Google Pay and Apple Pay integrations, Pix portability streams, legacy refactoring, and app unification. Java 11 with Spring and Micronaut on AWS (SQS, SNS, DynamoDB, S3, MSK) with Terraform.',
+      'Backend development for a digital bank — Google Pay and Apple Pay integrations, Pix portability streams, legacy refactoring, and app unification. Won 2nd place at Inter\'s hackathon building Babi, an AI assistant for the super app. Java 11 with Spring and Micronaut on AWS (SQS, SNS, DynamoDB, S3, MSK) with Terraform.',
   },
   {
     date: 'Feb 2019 – Feb 2020',
