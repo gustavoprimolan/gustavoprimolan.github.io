@@ -1,10 +1,10 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { getTranslations } from '../../i18n/translations';
-import { dateLocale, localizePath } from '../../i18n/utils';
+import { getTranslations } from '../../../i18n/translations';
+import { dateLocale, localizePath } from '../../../i18n/utils';
 
-const lang = 'en';
+const lang = 'pt';
 const t = getTranslations(lang);
 
 const posts = (await getCollection('blog'))

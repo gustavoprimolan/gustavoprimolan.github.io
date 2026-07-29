@@ -1,65 +1,62 @@
 ---
-import { site, interests } from '../data/site';
+import type { Locale } from '../i18n/types';
+import { getTranslations } from '../i18n/translations';
+import { site } from '../data/site';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
 ---
 
 <section class="section about" id="about">
   <div class="container">
     <div class="section-header">
-      <span class="section-tag">01 — About</span>
-      <h2 class="section-title">Who I am</h2>
+      <span class="section-tag">{t.about.tag}</span>
+      <h2 class="section-title">{t.about.title}</h2>
     </div>
     <div class="about-grid">
       <div class="about-text">
         <p class="lead">
-          I'm Gustavo — a software engineer based in {site.location}, currently at
-          <a href={site.companyUrl} target="_blank" rel="noopener noreferrer">{site.company}</a>,
-          one of Latin America's leading cryptocurrency platforms. But this site isn't just a résumé
-          in HTML. It's a picture of the whole person behind the commits.
+          {t.about.leadBefore}{' '}
+          <a href={site.companyUrl} target="_blank" rel="noopener noreferrer">{site.company}</a>
+          {t.about.leadAfter}
         </p>
-        <p>
-          Professionally, I care about backend systems that are reliable, secure, and built to last —
-          from fintech and digital banking to blockchain experiments, DevOps, and AI side projects.
-          I like understanding how things work under the hood and shipping code that holds up in
-          production.
-        </p>
-        <p>
-          Away from the keyboard, I'm just as active. I love <strong>video games</strong>, follow
-          <strong>sports</strong>, and train regularly — <strong>CrossFit</strong>, the{' '}
-          <strong>gym</strong>, and staying moving in general. I'm also involved in community and
-          event work (like building the site for Bauru Anime Fest), because the things I'm curious
-          about outside tech often find their way back into what I build.
-        </p>
+        <p>{t.about.p2}</p>
+        <p>{t.about.p3}</p>
         <div class="about-interests">
-          <h3 class="about-interests-label">Outside of work</h3>
+          <h3 class="about-interests-label">{t.about.outsideWork}</h3>
           <ul class="interest-tags">
-            {interests.map((interest) => (
+            {t.interests.map((interest) => (
               <li>{interest}</li>
             ))}
           </ul>
         </div>
       </div>
       <aside class="about-card">
-        <h3>Quick facts</h3>
+        <h3>{t.about.quickFacts}</h3>
         <dl>
           <div>
-            <dt>Location</dt>
+            <dt>{t.about.location}</dt>
             <dd>{site.location}</dd>
           </div>
           <div>
-            <dt>Company</dt>
+            <dt>{t.about.company}</dt>
             <dd>{site.company}</dd>
           </div>
           <div>
-            <dt>Focus</dt>
-            <dd>Backend &amp; Fintech</dd>
+            <dt>{t.about.focus}</dt>
+            <dd>{t.about.focusValue}</dd>
           </div>
           <div>
-            <dt>Languages</dt>
-            <dd>{site.languages}</dd>
+            <dt>{t.about.languages}</dt>
+            <dd>{t.about.languagesValue}</dd>
           </div>
           <div>
-            <dt>Also into</dt>
-            <dd>Games, sports &amp; fitness</dd>
+            <dt>{t.about.alsoInto}</dt>
+            <dd>{t.about.alsoIntoValue}</dd>
           </div>
         </dl>
       </aside>

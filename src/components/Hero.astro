@@ -1,5 +1,14 @@
 ---
+import type { Locale } from '../i18n/types';
+import { getTranslations } from '../i18n/translations';
 import { site } from '../data/site';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
 ---
 
 <section class="hero" id="hero">
@@ -9,7 +18,7 @@ import { site } from '../data/site';
         site.available && (
           <p class="hero-eyebrow">
             <span class="status-dot"></span>
-            Available for opportunities
+            {t.hero.available}
           </p>
         )
       }
@@ -18,11 +27,10 @@ import { site } from '../data/site';
         <em>Primolan</em>
       </h1>
       <p class="hero-subtitle">
-        Software Engineer at <strong>{site.company}</strong> — backend, fintech, and blockchain by
-        day. Video games, sports, CrossFit, and the gym when I'm off the clock.
+        {t.hero.subtitleBefore} <strong>{site.company}</strong> {t.hero.subtitleAfter}
       </p>
       <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">View my work</a>
+        <a href="#projects" class="btn btn-primary">{t.hero.viewWork}</a>
         <a href={site.linkedin} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
           LinkedIn
         </a>
@@ -33,15 +41,18 @@ import { site } from '../data/site';
       <div class="hero-stats">
         <div class="stat">
           <span class="stat-value">{site.publicRepos}+</span>
-          <span class="stat-label">Public repos</span>
+          <span class="stat-label">{t.hero.publicRepos}</span>
         </div>
         <div class="stat">
-          <span class="stat-value">{site.location}</span>
-          <span class="stat-label">Based in</span>
+          <span class="stat-value stat-value-location">
+            <span class="location-flag" aria-hidden="true">🇧🇷</span>
+            {t.hero.locationName}
+          </span>
+          <span class="stat-label">{t.hero.basedIn}</span>
         </div>
         <div class="stat">
           <span class="stat-value">{site.codingSince}</span>
-          <span class="stat-label">Coding since</span>
+          <span class="stat-label">{t.hero.codingSince}</span>
         </div>
       </div>
     </div>
@@ -61,8 +72,8 @@ import { site } from '../data/site';
       <div class="hero-orbit hero-orbit-2"></div>
     </div>
   </div>
-  <a href="#about" class="scroll-hint" aria-label="Scroll to about section">
-    <span>Scroll</span>
+  <a href="#about" class="scroll-hint" aria-label={t.hero.scrollAria}>
+    <span>{t.hero.scroll}</span>
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M12 5v14M5 12l7 7 7-7" />
     </svg>

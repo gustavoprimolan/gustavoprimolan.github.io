@@ -1,23 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import Skills from '../components/Skills.astro';
-import Projects from '../components/Projects.astro';
-import Accomplishments from '../components/Accomplishments.astro';
-import Experience from '../components/Experience.astro';
-import Education from '../components/Education.astro';
-import Contact from '../components/Contact.astro';
-import { site } from '../data/site';
+import HomePage from '../components/HomePage.astro';
 ---
 
-<BaseLayout title={`${site.name} | ${site.title}`} description={site.description}>
-  <Hero />
-  <About />
-  <Skills />
-  <Projects />
-  <Accomplishments limit={3} showViewAll />
-  <Experience />
-  <Education />
-  <Contact />
-</BaseLayout>
+<HomePage lang="en" />

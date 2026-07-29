@@ -1,7 +1,11 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import type { Locale } from '../i18n/types';
+import { getTranslations } from '../i18n/translations';
+import { dateLocale, localizePath } from '../i18n/utils';
 
 interface Props {
+  lang: Locale;
   title: string;
   description: string;
   pubDate: Date;
@@ -9,29 +13,31 @@ interface Props {
   tags?: string[];
 }
 
-const { title, description, pubDate, updatedDate, tags = [] } = Astro.props;
+const { lang, title, description, pubDate, updatedDate, tags = [] } = Astro.props;
+const t = getTranslations(lang);
+const locale = dateLocale(lang);
 
-const formattedDate = pubDate.toLocaleDateString('en-US', {
+const formattedDate = pubDate.toLocaleDateString(locale, {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
 });
 
-const formattedUpdated = updatedDate?.toLocaleDateString('en-US', {
+const formattedUpdated = updatedDate?.toLocaleDateString(locale, {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
 });
 ---
 
-<BaseLayout title={`${title} | Gustavo Primolan`} description={description}>
+<BaseLayout title={`${title} | Gustavo Primolan`} description={description} lang={lang}>
   <article class="section page-content">
     <div class="container content-narrow">
-      <a href="/blog" class="back-link">
+      <a href={localizePath(lang, '/blog')} class="back-link">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M19 12H5M12 19l-7-7 7-7" />
         </svg>
-        Back to blog
+        {t.blog.backToBlog}
       </a>
       <header class="post-header">
         <time datetime={pubDate.toISOString()}>{formattedDate}</time>
@@ -48,7 +54,9 @@ const formattedUpdated = updatedDate?.toLocaleDateString('en-US', {
         }
         {
           formattedUpdated && (
-            <p class="post-updated">Updated {formattedUpdated}</p>
+            <p class="post-updated">
+              {lang === 'pt' ? 'Atualizado em' : 'Updated'} {formattedUpdated}
+            </p>
           )
         }
       </header>

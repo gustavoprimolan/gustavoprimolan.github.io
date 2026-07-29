@@ -33,6 +33,9 @@ const accomplishments = defineCollection({
     summary: z.string().optional(),
     award: z.string().optional(),
     image: z.string().optional(),
+    titlePt: z.string().optional(),
+    summaryPt: z.string().optional(),
+    awardPt: z.string().optional(),
   }),
 });
 

@@ -1,14 +1,18 @@
 ---
 import { getCollection } from 'astro:content';
-import { accomplishmentCategories } from '../data/site';
+import type { Locale } from '../i18n/types';
+import { getTranslations } from '../i18n/translations';
+import { localizePath } from '../i18n/utils';
 
 interface Props {
+  lang: Locale;
   limit?: number;
   showViewAll?: boolean;
   showSectionHeader?: boolean;
 }
 
-const { limit, showViewAll = false, showSectionHeader = true } = Astro.props;
+const { lang, limit, showViewAll = false, showSectionHeader = true } = Astro.props;
+const t = getTranslations(lang);
 
 const allAccomplishments = await getCollection('accomplishments');
 const sorted = allAccomplishments.sort(
@@ -17,7 +21,22 @@ const sorted = allAccomplishments.sort(
 const items = limit ? sorted.slice(0, limit) : sorted;
 
 function formatDate(date: Date) {
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+  return date.toLocaleDateString(lang === 'pt' ? 'pt-BR' : 'en-US', {
+    year: 'numeric',
+    month: 'short',
+  });
+}
+
+function localizedTitle(data: (typeof sorted)[0]['data']) {
+  return lang === 'pt' && data.titlePt ? data.titlePt : data.title;
+}
+
+function localizedSummary(data: (typeof sorted)[0]['data']) {
+  return lang === 'pt' && data.summaryPt ? data.summaryPt : data.summary;
+}
+
+function localizedAward(data: (typeof sorted)[0]['data']) {
+  return lang === 'pt' && data.awardPt ? data.awardPt : data.award;
 }
 ---
 
@@ -27,13 +46,13 @@ function formatDate(date: Date) {
       showSectionHeader && (
         <div class="section-header section-header-row">
           <div>
-            <span class="section-tag">04 — Accomplishments</span>
-            <h2 class="section-title">Certificates & milestones</h2>
+            <span class="section-tag">{t.accomplishments.tag}</span>
+            <h2 class="section-title">{t.accomplishments.title}</h2>
           </div>
           {
             showViewAll && sorted.length > (limit ?? 0) && (
-              <a href="/accomplishments" class="link-arrow">
-                View all
+              <a href={localizePath(lang, '/accomplishments')} class="link-arrow">
+                {t.accomplishments.viewAll}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M7 17L17 7M17 7H7M17 7v10" />
                 </svg>
@@ -46,51 +65,55 @@ function formatDate(date: Date) {
 
     {
       items.length === 0 ? (
-        <p class="empty-state">
-          No accomplishments yet. Add markdown files in <code>src/content/accomplishments/</code>.
-        </p>
+        <p class="empty-state">{t.accomplishments.empty}</p>
       ) : (
         <div class="accomplishments-grid">
           {
-            items.map(({ data }) => (
-              <article class="accomplishment-card">
-                {data.image && (
-                  <img
-                    src={data.image}
-                    alt={`${data.title} — ${data.award ?? 'award'}`}
-                    class="accomplishment-image"
-                    loading="lazy"
-                    width="400"
-                    height="300"
-                  />
-                )}
-                <div class="accomplishment-meta">
-                  <span class={`category-badge category-${data.category}`}>
-                    {accomplishmentCategories[data.category]}
-                  </span>
-                  {data.award && <span class="award-badge">{data.award}</span>}
-                  <time datetime={data.date.toISOString()}>{formatDate(data.date)}</time>
-                </div>
-                <h3>{data.title}</h3>
-                <p class="accomplishment-issuer">{data.issuer}</p>
-                {data.summary && <p class="accomplishment-desc">{data.summary}</p>}
-                <div class="accomplishment-footer">
-                  {data.credentialId && (
-                    <span class="credential-id">ID: {data.credentialId}</span>
+            items.map(({ data }) => {
+              const title = localizedTitle(data);
+              const summary = localizedSummary(data);
+              const award = localizedAward(data);
+
+              return (
+                <article class="accomplishment-card">
+                  {data.image && (
+                    <img
+                      src={data.image}
+                      alt={`${title}${award ? ` — ${award}` : ''}`}
+                      class="accomplishment-image"
+                      loading="lazy"
+                      width="400"
+                      height="300"
+                    />
                   )}
-                  {
-                    data.url && (
-                      <a href={data.url} target="_blank" rel="noopener noreferrer" class="link-arrow">
-                        Verify
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <path d="M7 17L17 7M17 7H7M17 7v10" />
-                        </svg>
-                      </a>
-                    )
-                  }
-                </div>
-              </article>
-            ))
+                  <div class="accomplishment-meta">
+                    <span class={`category-badge category-${data.category}`}>
+                      {t.accomplishments.categories[data.category]}
+                    </span>
+                    {award && <span class="award-badge">{award}</span>}
+                    <time datetime={data.date.toISOString()}>{formatDate(data.date)}</time>
+                  </div>
+                  <h3>{title}</h3>
+                  <p class="accomplishment-issuer">{data.issuer}</p>
+                  {summary && <p class="accomplishment-desc">{summary}</p>}
+                  <div class="accomplishment-footer">
+                    {data.credentialId && (
+                      <span class="credential-id">ID: {data.credentialId}</span>
+                    )}
+                    {
+                      data.url && (
+                        <a href={data.url} target="_blank" rel="noopener noreferrer" class="link-arrow">
+                          {t.accomplishments.verify}
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10" />
+                          </svg>
+                        </a>
+                      )
+                    }
+                  </div>
+                </article>
+              );
+            })
           }
         </div>
       )

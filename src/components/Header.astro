@@ -1,35 +1,51 @@
 ---
-const navItems = [
-  { href: '/#about', label: 'About' },
-  { href: '/#skills', label: 'Skills' },
-  { href: '/#projects', label: 'Projects' },
-  { href: '/#accomplishments', label: 'Accomplishments' },
-  { href: '/#experience', label: 'Experience' },
-  { href: '/#education', label: 'Education' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/#contact', label: 'Contact', cta: true },
-];
+import type { Locale } from '../i18n/types';
+import { getTranslations } from '../i18n/translations';
+import { localizePath } from '../i18n/utils';
+import LanguageSwitcher from './LanguageSwitcher.astro';
 
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const prefix = localizePath(lang, '/');
 const pathname = Astro.url.pathname;
-const isHome = pathname === '/';
+const isHome = pathname === '/' || pathname === '/pt' || pathname === '/pt/';
+
+const navItems = [
+  { href: `${prefix}#about`, label: t.nav.about },
+  { href: `${prefix}#skills`, label: t.nav.skills },
+  { href: `${prefix}#projects`, label: t.nav.projects },
+  { href: `${prefix}#accomplishments`, label: t.nav.accomplishments },
+  { href: `${prefix}#experience`, label: t.nav.experience },
+  { href: `${prefix}#education`, label: t.nav.education },
+  { href: localizePath(lang, '/blog'), label: t.nav.blog },
+  { href: `${prefix}#contact`, label: t.nav.contact, cta: true },
+];
 ---
 
 <header class="header" id="header">
   <nav class="nav container">
-    <a href="/" class="nav-logo">GP<span class="nav-logo-dot">.</span></a>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-    </button>
+    <a href={prefix} class="nav-logo">GP<span class="nav-logo-dot">.</span></a>
+    <div class="nav-actions">
+      <LanguageSwitcher lang={lang} />
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        aria-label={t.nav.toggleMenu}
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+      </button>
+    </div>
     <ul class="nav-links" id="nav-links">
       {
         navItems.map(({ href, label, cta }) => (
           <li>
-            <a
-              href={href}
-              class:list={{ 'nav-cta': cta }}
-              aria-current={!cta && isHome && href.startsWith('/#') ? undefined : pathname === href ? 'page' : undefined}
-            >
+            <a href={href} class:list={{ 'nav-cta': cta }}>
               {label}
             </a>
           </li>

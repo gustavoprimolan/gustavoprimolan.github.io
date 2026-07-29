@@ -1,16 +1,24 @@
 ---
-import { skills } from '../data/site';
+import type { Locale } from '../i18n/types';
+import { getTranslations } from '../i18n/translations';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
 ---
 
 <section class="section skills" id="skills">
   <div class="container">
     <div class="section-header">
-      <span class="section-tag">02 — Skills</span>
-      <h2 class="section-title">Technologies I work with</h2>
+      <span class="section-tag">{t.skills.tag}</span>
+      <h2 class="section-title">{t.skills.title}</h2>
     </div>
     <div class="skills-grid">
       {
-        skills.map((skill) => (
+        t.skills.items.map((skill) => (
           <article class="skill-card">
             <div class="skill-icon">
               {skill.icon === 'code' && (
