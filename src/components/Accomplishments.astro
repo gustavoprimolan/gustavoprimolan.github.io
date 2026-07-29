@@ -57,7 +57,7 @@ function formatDate(date: Date) {
                 {data.image && (
                   <img
                     src={data.image}
-                    alt=""
+                    alt={`${data.title} — ${data.award ?? 'award'}`}
                     class="accomplishment-image"
                     loading="lazy"
                     width="400"
