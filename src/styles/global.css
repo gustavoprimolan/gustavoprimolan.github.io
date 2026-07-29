@@ -946,11 +946,9 @@ main {
 }
 
 .accomplishment-image {
+  display: block;
   width: 100%;
   height: auto;
-  max-height: 420px;
-  object-fit: contain;
-  object-position: center;
   border-radius: var(--radius-sm);
   margin-bottom: 1rem;
   border: 1px solid var(--border);
